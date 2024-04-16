@@ -1,10 +1,9 @@
-require('dotenv').config(); 
 const APIController = (function() {
     
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+    const clientId = 'c7fa1cca082a4ef9958ea33316887c69';
+    const clientSecret = '8a413df103244a8db84efc14c35fe7b3';
+
     // private methods
-    
     const _getToken = async () => {
 
         const result = await fetch('https://accounts.spotify.com/api/token', {
@@ -75,9 +74,8 @@ const APIController = (function() {
         });
         const data = await result.json();
         return data.tracks.items;
-    };
-    
-    
+    }
+
     return {
         getToken() {
             return _getToken();
@@ -148,6 +146,7 @@ const UIController = (function() {
             const html = `<a href="#" class="list-group-item list-group-item-action list-group-item-light" id="${id}">${name}</a>`;
             document.querySelector(DOMElements.divSonglist).insertAdjacentHTML('beforeend', html);
         },
+        
 
         // need method to create the song detail
         createTrackDetail(img, title, artist) {
@@ -199,6 +198,7 @@ const UIController = (function() {
             const list = tracks.map(track => `<li>${track.name} - ${track.artists.map(artist => artist.name).join(", ")}</li>`).join('');
             document.querySelector('.original-tracks').innerHTML = `<ul>${list}</ul>`;
         }
+        
     }
 
 })();
@@ -218,8 +218,7 @@ const APPController = (function(UICtrl, APICtrl) {
         const genres = await APICtrl.getGenres(token);
         //populate our genres select element
         genres.forEach(element => UICtrl.createGenre(element.name, element.id));
-    };
-
+    }
     const findOriginalTrack = async () => {
         const trackUrl = DOMInputs.trackUrl.value;
         const trackId = trackUrl.split('/').pop();
@@ -228,7 +227,7 @@ const APPController = (function(UICtrl, APICtrl) {
         const query = `${remixDetails.name.replace(/remix|edit|mix|version/i, '').trim()} artist:${remixDetails.artists[0].name}`;
         const originalTracks = await APICtrl.searchTracks(token, query);
         UICtrl.displayOriginalTracks(originalTracks);
-    };
+    }
 
     // create genre change event listener
     DOMInputs.genre.addEventListener('change', async () => {

@@ -42,15 +42,3 @@ img.track {
   border: 3px solid #8a8a8a;
 }
 
-.original-tracks {
-  position: absolute;  /* Use absolute positioning */
-  top: 50%;            /* Position at the half of the viewport height */
-  left: 50%;           /* Position at the half of the viewport width */
-  transform: translate(-50%, -50%); /* Adjust the exact center to be the middle of the element */
-  width: 80%;          /* Optional: controls the width of the container */
-  max-width: 600px;    /* Optional: prevents the container from becoming too wide on large screens */
-  padding: 20px;       /* Optional: adds some padding inside the container */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Optional: adds a subtle shadow for better visibility */
-  background: #fff;    /* Optional: ensures the text is readable by providing a contrasting background */
-  text-align: center;  /* Optional: centers the text inside the container */
-}
